@@ -65,6 +65,6 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 ## Task 9 — Filtering by status
 - Brief: Users should be able to filter assignments by status so incomplete tasks don't get buried under completed ones.
 - What Claude proposed: A `?filter=` query param on the index route with All / Incomplete / In Progress / Complete filter links on the homepage.
-- What I changed before approving: —
-- Verification: Clicked "Incomplete", confirmed complete assignments were hidden. Clicked "All", confirmed everything reappeared. `pytest` passes 23 tests.
+- What I changed before approving: Requested that the "Incomplete" filter also show "in progress" assignments so work in progress doesn't get hidden from view.
+- Verification: Clicked "Incomplete", confirmed complete assignments were hidden but in progress ones still showed. Clicked "All", confirmed everything reappeared. `pytest` passes 23 tests.
 - One thing I learned: ...
