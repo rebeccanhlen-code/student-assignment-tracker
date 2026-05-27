@@ -1,6 +1,15 @@
 from app import assignments
 import re
 
+import pytest
+from app import app as flask_app
+
+@pytest.fixture
+def client():
+    flask_app.config["TESTING"] = True
+    with flask_app.test_client() as client:
+        yield client
+
 def test_assignments_is_not_empty() -> None:
     assert len(assignments) > 0
 
@@ -29,3 +38,26 @@ def test_due_date_format() -> None:
 def test_title_is_not_empty() -> None:
     for assignment in assignments:
         assert assignment["title"] != ""
+
+
+def test_homepage_returns_200(client) -> None:
+    response = client.get("/")
+    assert response.status_code == 200
+
+def test_homepage_shows_assignment_title(client) -> None:
+    response = client.get("/")
+    assert b"Math Homework Chapter 5" in response.data
+
+
+def test_new_assignment_redirects_to_homepage(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "Test Assignment",
+        "due_date": "06-01-2026",
+        "subject": "Science",
+        "notes": "",
+        "links": "",
+    })
+    assert response.status_code == 302
+    assert response.headers["Location"] == "/"
+
+    

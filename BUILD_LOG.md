@@ -27,3 +27,10 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - Verification: Started `python app.py`, opened http://localhost:5000, saw Math Homework assignment with all fields displayed.
 - One thing I learned: ...
 
+## Task 4 — Add a new assignment form
+- Brief: Build a form to add new assignments that redirects to the homepage on submit, with each new entry getting a unique id.
+- What Claude proposed: A `templates/new.html` form with POST to `/assignments/new`, a new route that appends to the assignments list and increments `next_id`, and a link on the homepage.
+- What I changed before approving: —
+- Verification: Submitted the form with a new assignment, was redirected to homepage, new assignment appeared in the list. `pytest` passes 9 tests.
+- One thing I learned: ...
+
