@@ -49,6 +49,22 @@ def test_homepage_shows_assignment_title(client) -> None:
     assert b"Math Homework Chapter 5" in response.data
 
 
+def test_empty_form_shows_errors(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "", "due_date": "", "subject": "", "notes": "", "links": ""
+    })
+    assert response.status_code == 200
+    assert b"required" in response.data
+
+
+def test_partial_form_preserves_filled_values(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "My Assignment", "due_date": "", "subject": "", "notes": "", "links": ""
+    })
+    assert response.status_code == 200
+    assert b"My Assignment" in response.data
+
+
 def test_new_assignment_redirects_to_homepage(client) -> None:
     response = client.post("/assignments/new", data={
         "title": "Test Assignment",
