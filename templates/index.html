@@ -18,7 +18,9 @@
             <p><strong>Status:</strong> {{ assignment.status }}
                 <form method="POST" action="/assignments/{{ assignment.id }}/toggle" style="display:inline;">
                     <button type="submit">
-                        {% if assignment.status == "incomplete" %}Mark Complete{% else %}Mark Incomplete{% endif %}
+                        {% if assignment.status == "incomplete" %}Mark In Progress
+                        {% elif assignment.status == "in progress" %}Mark Complete
+                        {% else %}Mark Incomplete{% endif %}
                     </button>
                 </form>
             </p>

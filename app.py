@@ -90,7 +90,8 @@ def new_assignment() -> str:
 def toggle_assignment(assignment_id: int) -> str:
     for assignment in assignments:
         if assignment["id"] == assignment_id:
-            assignment["status"] = "complete" if assignment["status"] == "incomplete" else "incomplete"
+            cycle = {"incomplete": "in progress", "in progress": "complete", "complete": "incomplete"}
+            assignment["status"] = cycle[assignment["status"]]
             return redirect(url_for("index"))
     abort(404)
 
