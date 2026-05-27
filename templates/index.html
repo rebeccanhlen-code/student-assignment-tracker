@@ -46,6 +46,9 @@
                 {% endfor %}
             </p>
             {% endif %}
+            <form method="POST" action="/assignments/{{ assignment.id }}/delete" style="display:inline;">
+                <button type="submit" onclick="return confirm('Delete this assignment?')">Delete</button>
+            </form>
         </div>
         <hr>
         {% endfor %}

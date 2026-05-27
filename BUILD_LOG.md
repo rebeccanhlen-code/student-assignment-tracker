@@ -68,3 +68,10 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - What I changed before approving: Requested that the "Incomplete" filter also show "in progress" assignments so work in progress doesn't get hidden from view.
 - Verification: Clicked "Incomplete", confirmed complete assignments were hidden but in progress ones still showed. Clicked "All", confirmed everything reappeared. `pytest` passes 23 tests.
 - One thing I learned: ...
+
+## Task 10 — Delete an assignment
+- Brief: Users should be able to delete an assignment by id, with a 404 returned if the id doesn't exist.
+- What Claude proposed: A POST route `/assignments/<id>/delete` that removes the assignment by id and redirects home. Delete button with a confirmation prompt on each card.
+- What I changed before approving: Recommended returning a 404 if the id isn't found rather than silently doing nothing.
+- Verification: Deleted an assignment, confirmed it disappeared from the list. Tested unknown id returns 404. `pytest` passes 25 tests.
+- One thing I learned: ...
