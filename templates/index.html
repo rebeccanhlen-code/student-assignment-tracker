@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Assignment Tracker</title>
+    <style>
+        .overdue { border-left: 4px solid crimson; padding-left: 8px; background-color: #fff0f0; }
+        .urgent  { border-left: 4px solid red; padding-left: 8px; }
+        .soon    { border-left: 4px solid orange; padding-left: 8px; }
+    </style>
 </head>
 <body>
     <h1>My Assignments</h1>
@@ -11,7 +16,7 @@
 
     {% if assignments %}
         {% for assignment in assignments %}
-        <div>
+        <div class="{{ urgency_class(assignment.due_date) }}">
             <h2>{{ assignment.title }}</h2>
             <p><strong>Subject:</strong> {{ assignment.subject }}</p>
             <p><strong>Due:</strong> {{ assignment.due_date }}</p>
