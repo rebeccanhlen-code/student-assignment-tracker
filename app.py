@@ -1,3 +1,5 @@
+import re
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from typing import TypedDict
 
@@ -49,6 +51,12 @@ def new_assignment() -> str:
             errors["title"] = "Title is required."
         if not due_date:
             errors["due_date"] = "Due date is required."
+        elif not re.match(r"^\d{2}-\d{2}-\d{4}$", due_date):
+            errors["due_date"] = "Date must be in MM-DD-YYYY format (numbers only)."
+        else:
+            year = int(due_date.split("-")[2])
+            if year < datetime.now().year:
+                errors["due_date"] = f"Year must be {datetime.now().year} or later."
         if not subject:
             errors["subject"] = "Subject is required."
 
