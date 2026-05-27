@@ -79,6 +79,6 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 ## Task 11 — Polish UI
 - Brief: Make the app readable, clean, and visually appealing.
 - What Claude proposed: A dedicated `static/style.css` with a blue and white theme — blue header, white cards with shadows, colored status badges (yellow/blue/green), urgency border colors, clean form layout.
-- What I changed before approving: Chose a blue theme. Asked about user-picked colors (noted as a future feature needing a database).
+- What I changed before approving: Chose a blue theme. Asked about user-picked colors (noted as a future feature needing a database). Requested CSS variables so the theme is easy to customize, and a dark mode toggle that remembers your preference.
 - Verification: Opened the app, confirmed cards, badges, filter buttons, and form all look clean and readable.
 - One thing I learned: ...

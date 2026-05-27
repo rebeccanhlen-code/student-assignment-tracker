@@ -1,3 +1,24 @@
+/* ── Theme variables — edit these to change the whole color scheme ── */
+:root {
+    --accent:      #1a56db;   /* main blue */
+    --accent-dark: #1341a8;   /* darker blue for hover */
+    --bg:          #f0f4f8;   /* page background */
+    --surface:     #ffffff;   /* card / form background */
+    --text:        #1a1a2e;   /* main text */
+    --text-muted:  #555555;   /* secondary text */
+    --border:      #c3d9ff;   /* input / card border */
+}
+
+[data-theme="dark"] {
+    --accent:      #4d8aff;
+    --accent-dark: #2563eb;
+    --bg:          #0f172a;
+    --surface:     #1e293b;
+    --text:        #f1f5f9;
+    --text-muted:  #94a3b8;
+    --border:      #334155;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,14 +27,14 @@
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f0f4f8;
-    color: #1a1a2e;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
 }
 
 /* ── Nav ── */
 header {
-    background: #1a56db;
+    background: var(--accent);
     padding: 16px 32px;
     display: flex;
     align-items: center;
@@ -27,8 +48,8 @@ header h1 {
 }
 
 header a {
-    background: white;
-    color: #1a56db;
+    background: var(--surface);
+    color: var(--accent);
     padding: 8px 18px;
     border-radius: 6px;
     text-decoration: none;
@@ -61,20 +82,20 @@ main {
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 500;
-    background: white;
-    color: #1a56db;
-    border: 1px solid #c3d9ff;
+    background: var(--surface);
+    color: var(--accent);
+    border: 1px solid var(--border);
     transition: all 0.15s;
 }
 
 .filters a:hover {
-    background: #1a56db;
+    background: var(--accent);
     color: white;
 }
 
 /* ── Assignment card ── */
 .card {
-    background: white;
+    background: var(--surface);
     border-radius: 10px;
     padding: 18px 20px;
     margin-bottom: 16px;
@@ -89,14 +110,14 @@ main {
 .card h2 {
     font-size: 1.1rem;
     margin-bottom: 8px;
-    color: #1a1a2e;
+    color: var(--text);
 }
 
 .card-meta {
     display: flex;
     gap: 16px;
     font-size: 0.85rem;
-    color: #555;
+    color: var(--text-muted);
     margin-bottom: 10px;
     flex-wrap: wrap;
 }
@@ -140,7 +161,7 @@ button, .btn {
 button:hover { opacity: 0.85; }
 
 .btn-toggle {
-    background: #1a56db;
+    background: var(--accent);
     color: white;
 }
 
@@ -159,7 +180,7 @@ button:hover { opacity: 0.85; }
 
 /* ── Form page ── */
 .form-container {
-    background: white;
+    background: var(--surface);
     border-radius: 10px;
     padding: 28px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
@@ -168,7 +189,7 @@ button:hover { opacity: 0.85; }
 .form-container h1 {
     margin-bottom: 24px;
     font-size: 1.3rem;
-    color: #1a1a2e;
+    color: var(--text);
 }
 
 .form-group {
@@ -187,7 +208,7 @@ button:hover { opacity: 0.85; }
 .form-group textarea {
     width: 100%;
     padding: 9px 12px;
-    border: 1px solid #c3d9ff;
+    border: 1px solid var(--border);
     border-radius: 6px;
     font-size: 0.95rem;
     outline: none;
@@ -196,7 +217,7 @@ button:hover { opacity: 0.85; }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #1a56db;
+    border-color: var(--accent);
 }
 
 .form-group textarea {
@@ -211,7 +232,7 @@ button:hover { opacity: 0.85; }
 }
 
 .btn-submit {
-    background: #1a56db;
+    background: var(--accent);
     color: white;
     padding: 10px 24px;
     font-size: 0.95rem;
@@ -226,7 +247,7 @@ button:hover { opacity: 0.85; }
 .back-link {
     display: inline-block;
     margin-top: 14px;
-    color: #1a56db;
+    color: var(--accent);
     text-decoration: none;
     font-size: 0.88rem;
 }
