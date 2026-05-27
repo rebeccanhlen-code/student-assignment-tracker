@@ -9,8 +9,25 @@
 <body>
     <header>
         <h1>📚 My Assignments</h1>
-        <a href="/">← Back</a>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <button id="theme-toggle" onclick="toggleTheme()" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.4); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:0.85rem;">🌙 Dark</button>
+            <a href="/">← Back</a>
+        </div>
     </header>
+
+    <script>
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-toggle').textContent = isDark ? '🌙 Dark' : '☀️ Light';
+        }
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-toggle').textContent = '☀️ Light';
+        }
+    </script>
 
     <main>
         <div class="form-container">
