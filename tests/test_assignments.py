@@ -57,6 +57,22 @@ def test_empty_form_shows_errors(client) -> None:
     assert b"required" in response.data
 
 
+def test_invalid_date_format_shows_error(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "Test", "due_date": "not-a-date", "subject": "Math", "notes": "", "links": ""
+    })
+    assert response.status_code == 200
+    assert b"MM-DD-YYYY" in response.data
+
+
+def test_past_year_shows_error(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "Test", "due_date": "05-28-2020", "subject": "Math", "notes": "", "links": ""
+    })
+    assert response.status_code == 200
+    assert b"or later" in response.data
+
+
 def test_partial_form_preserves_filled_values(client) -> None:
     response = client.post("/assignments/new", data={
         "title": "My Assignment", "due_date": "", "subject": "", "notes": "", "links": ""

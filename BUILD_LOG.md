@@ -23,21 +23,21 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 ## Task 3 — Build the homepage to display assignments
 - Brief: Render the assignments list in the browser with all fields visible using a Jinja2 template.
 - What Claude proposed: A `templates/index.html` that loops over assignments with Jinja2, updated `/` route to call `render_template`.
-- What I changed before approving: —
+- What I changed before approving: Noticed the app wasn't accessible in Codespaces — Claude had to add host="0.0.0.0" to app.run() to fix it. I caught this by trying to open the app and getting a 502 error.
 - Verification: Started `python app.py`, opened http://localhost:5000, saw Math Homework assignment with all fields displayed.
 - One thing I learned: ...
 
 ## Task 4 — Add a new assignment form
 - Brief: Build a form to add new assignments that redirects to the homepage on submit, with each new entry getting a unique id.
 - What Claude proposed: A `templates/new.html` form with POST to `/assignments/new`, a new route that appends to the assignments list and increments `next_id`, and a link on the homepage.
-- What I changed before approving: —
+- What I changed before approving: Wrote my own test (test_redirection) that failed because the route didn't exist and caught that the test was testing the wrong endpoint and fixed it to test the actual POST redirect instead.
 - Verification: Submitted the form with a new assignment, was redirected to homepage, new assignment appeared in the list. `pytest` passes 9 tests.
 - One thing I learned: ...
 
 ## Task 5 — Add form validation
 - Brief: Submitting empty fields should show inline error messages without crashing the app.
 - What Claude proposed: Check title, due_date, subject in the POST handler; re-render the form with error messages and preserved values if any are blank.
-- What I changed before approving: —
+- What I changed before approving: Edit it to make sure only numbers are required in the date slot and that the year cannot be past this current year
 - Verification: Submitted the form empty, saw red error messages. Filled in just the title, saw it preserved after the error. `pytest` passes 11 tests.
 - One thing I learned: ...
 
