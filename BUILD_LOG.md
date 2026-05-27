@@ -54,3 +54,10 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - What I changed before approving: Added an "in progress" status so the cycle is incomplete → in progress → complete → incomplete.
 - Verification: Clicked through all three statuses on an assignment, page reloaded showing each change correctly. `pytest` passes 17 tests.
 - One thing I learned: ...
+
+## Task 8 — Visual priority indicator
+- Brief: Assignments due soon should show a visual warning — red for due today or tomorrow, orange for within 3 days.
+- What Claude proposed: An `urgency_class` helper that computes days until due and returns "urgent" or "soon", registered as a Jinja2 global, with CSS border styles on each assignment card.
+- What I changed before approving: —
+- Verification: Added a test assignment due tomorrow, confirmed a red left border appeared. Far-future assignments had no styling. `pytest` passes 19 tests.
+- One thing I learned: ...

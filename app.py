@@ -31,6 +31,22 @@ assignments: list[Assignment] = [
 next_id: int = 2
 
 
+def urgency_class(due_date: str) -> str:
+    try:
+        due = datetime.strptime(due_date, "%m-%d-%Y").date()
+        days = (due - datetime.now().date()).days
+        if days <= 1:
+            return "urgent"
+        if days <= 3:
+            return "soon"
+    except ValueError:
+        pass
+    return ""
+
+
+app.jinja_env.globals["urgency_class"] = urgency_class
+
+
 def sort_key(a: Assignment) -> str:
     parts = a["due_date"].split("-")
     return f"{parts[2]}-{parts[0]}-{parts[1]}"

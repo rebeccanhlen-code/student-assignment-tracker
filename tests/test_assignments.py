@@ -70,6 +70,18 @@ def test_toggle_unknown_id_returns_404(client) -> None:
     assert response.status_code == 404
 
 
+def test_urgency_class_due_tomorrow() -> None:
+    from datetime import date, timedelta
+    from app import urgency_class
+    tomorrow = (date.today() + timedelta(days=1)).strftime("%m-%d-%Y")
+    assert urgency_class(tomorrow) == "urgent"
+
+
+def test_urgency_class_far_future() -> None:
+    from app import urgency_class
+    assert urgency_class("01-01-2099") == ""
+
+
 def test_homepage_returns_200(client) -> None:
     response = client.get("/")
     assert response.status_code == 200
