@@ -15,8 +15,8 @@
             {% if errors.title %}<span style="color:red;">{{ errors.title }}</span>{% endif %}
         </div>
         <div>
-            <label for="due_date">Due Date (MM-DD-YYYY)</label><br>
-            <input type="text" id="due_date" name="due_date" placeholder="05-28-2026" value="{{ form.get('due_date', '') }}">
+            <label for="due_date">Due Date</label><br>
+            <input type="text" id="due_date" name="due_date" placeholder="MM-DD-YYYY" maxlength="10" value="{{ form.get('due_date', '') }}">
             {% if errors.due_date %}<span style="color:red;">{{ errors.due_date }}</span>{% endif %}
         </div>
         <div>
@@ -38,5 +38,19 @@
 
     <br>
     <a href="/">Back to assignments</a>
+
+    <script>
+        const dateInput = document.getElementById('due_date');
+        dateInput.addEventListener('input', function () {
+            let digits = this.value.replace(/\D/g, '').slice(0, 8);
+            if (digits.length >= 5) {
+                this.value = digits.slice(0,2) + '-' + digits.slice(2,4) + '-' + digits.slice(4);
+            } else if (digits.length >= 3) {
+                this.value = digits.slice(0,2) + '-' + digits.slice(2);
+            } else {
+                this.value = digits;
+            }
+        });
+    </script>
 </body>
 </html>

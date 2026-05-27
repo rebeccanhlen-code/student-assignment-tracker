@@ -31,9 +31,15 @@ assignments: list[Assignment] = [
 next_id: int = 2
 
 
+def sort_key(a: Assignment) -> str:
+    parts = a["due_date"].split("-")
+    return f"{parts[2]}-{parts[0]}-{parts[1]}"
+
+
 @app.route("/")
 def index() -> str:
-    return render_template("index.html", assignments=assignments)
+    sorted_assignments = sorted(assignments, key=sort_key)
+    return render_template("index.html", assignments=sorted_assignments)
 
 
 @app.route("/assignments/new", methods=["GET", "POST"])
@@ -54,9 +60,12 @@ def new_assignment() -> str:
         elif not re.match(r"^\d{2}-\d{2}-\d{4}$", due_date):
             errors["due_date"] = "Date must be in MM-DD-YYYY format (numbers only)."
         else:
-            year = int(due_date.split("-")[2])
-            if year < datetime.now().year:
-                errors["due_date"] = f"Year must be {datetime.now().year} or later."
+            try:
+                parsed = datetime.strptime(due_date, "%m-%d-%Y")
+                if parsed.year < datetime.now().year:
+                    errors["due_date"] = f"Year must be {datetime.now().year} or later."
+            except ValueError:
+                errors["due_date"] = "That's not a real date. Please enter a valid MM-DD-YYYY date."
         if not subject:
             errors["subject"] = "Subject is required."
 

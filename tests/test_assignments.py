@@ -40,6 +40,20 @@ def test_title_is_not_empty() -> None:
         assert assignment["title"] != ""
 
 
+def test_homepage_sorted_by_due_date(client) -> None:
+    from app import assignments
+    assignments.clear()
+    assignments.extend([
+        {"id": 10, "title": "Late", "due_date": "12-01-2026", "subject": "Math", "status": "incomplete", "notes": "", "links": []},
+        {"id": 11, "title": "Early", "due_date": "06-01-2026", "subject": "Math", "status": "incomplete", "notes": "", "links": []},
+    ])
+    response = client.get("/")
+    body = response.data.decode()
+    assert body.index("Early") < body.index("Late")
+    assignments.clear()
+    assignments.append({"id": 1, "title": "Math Homework Chapter 5", "due_date": "05-28-2026", "subject": "Math", "status": "incomplete", "notes": "Review sections 5.1 through 5.3", "links": []})
+
+
 def test_homepage_returns_200(client) -> None:
     response = client.get("/")
     assert response.status_code == 200
@@ -63,6 +77,14 @@ def test_invalid_date_format_shows_error(client) -> None:
     })
     assert response.status_code == 200
     assert b"MM-DD-YYYY" in response.data
+
+
+def test_impossible_date_shows_error(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "Test", "due_date": "04-42-2026", "subject": "Math", "notes": "", "links": ""
+    })
+    assert response.status_code == 200
+    assert b"real date" in response.data
 
 
 def test_past_year_shows_error(client) -> None:
