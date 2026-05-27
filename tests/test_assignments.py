@@ -70,6 +70,19 @@ def test_toggle_unknown_id_returns_404(client) -> None:
     assert response.status_code == 404
 
 
+def test_delete_removes_assignment(client) -> None:
+    from app import assignments
+    assignments.append({"id": 99, "title": "To Delete", "due_date": "12-01-2026", "subject": "Math", "status": "incomplete", "notes": "", "links": []})
+    response = client.post("/assignments/99/delete")
+    assert response.status_code == 302
+    assert not any(a["id"] == 99 for a in assignments)
+
+
+def test_delete_unknown_id_returns_404(client) -> None:
+    response = client.post("/assignments/9999/delete")
+    assert response.status_code == 404
+
+
 def test_filter_incomplete_hides_complete(client) -> None:
     from app import assignments
     assignments.clear()

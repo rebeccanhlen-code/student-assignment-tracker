@@ -121,5 +121,14 @@ def toggle_assignment(assignment_id: int) -> str:
     abort(404)
 
 
+@app.route("/assignments/<int:assignment_id>/delete", methods=["POST"])
+def delete_assignment(assignment_id: int) -> str:
+    for i, assignment in enumerate(assignments):
+        if assignment["id"] == assignment_id:
+            assignments.pop(i)
+            return redirect(url_for("index"))
+    abort(404)
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
