@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
 from typing import TypedDict
 
 app = Flask(__name__)
@@ -84,6 +84,16 @@ def new_assignment() -> str:
         next_id += 1
         return redirect(url_for("index"))
     return render_template("new.html", errors={}, form={})
+
+
+@app.route("/assignments/<int:assignment_id>/toggle", methods=["POST"])
+def toggle_assignment(assignment_id: int) -> str:
+    for assignment in assignments:
+        if assignment["id"] == assignment_id:
+            cycle = {"incomplete": "in progress", "in progress": "complete", "complete": "incomplete"}
+            assignment["status"] = cycle[assignment["status"]]
+            return redirect(url_for("index"))
+    abort(404)
 
 
 if __name__ == "__main__":

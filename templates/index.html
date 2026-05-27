@@ -15,7 +15,15 @@
             <h2>{{ assignment.title }}</h2>
             <p><strong>Subject:</strong> {{ assignment.subject }}</p>
             <p><strong>Due:</strong> {{ assignment.due_date }}</p>
-            <p><strong>Status:</strong> {{ assignment.status }}</p>
+            <p><strong>Status:</strong> {{ assignment.status }}
+                <form method="POST" action="/assignments/{{ assignment.id }}/toggle" style="display:inline;">
+                    <button type="submit">
+                        {% if assignment.status == "incomplete" %}Mark In Progress
+                        {% elif assignment.status == "in progress" %}Mark Complete
+                        {% else %}Mark Incomplete{% endif %}
+                    </button>
+                </form>
+            </p>
             {% if assignment.notes %}
             <p><strong>Notes:</strong> {{ assignment.notes }}</p>
             {% endif %}
