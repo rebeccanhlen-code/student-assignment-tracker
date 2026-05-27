@@ -60,9 +60,12 @@ def new_assignment() -> str:
         elif not re.match(r"^\d{2}-\d{2}-\d{4}$", due_date):
             errors["due_date"] = "Date must be in MM-DD-YYYY format (numbers only)."
         else:
-            year = int(due_date.split("-")[2])
-            if year < datetime.now().year:
-                errors["due_date"] = f"Year must be {datetime.now().year} or later."
+            try:
+                parsed = datetime.strptime(due_date, "%m-%d-%Y")
+                if parsed.year < datetime.now().year:
+                    errors["due_date"] = f"Year must be {datetime.now().year} or later."
+            except ValueError:
+                errors["due_date"] = "That's not a real date. Please enter a valid MM-DD-YYYY date."
         if not subject:
             errors["subject"] = "Subject is required."
 

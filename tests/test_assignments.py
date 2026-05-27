@@ -79,6 +79,14 @@ def test_invalid_date_format_shows_error(client) -> None:
     assert b"MM-DD-YYYY" in response.data
 
 
+def test_impossible_date_shows_error(client) -> None:
+    response = client.post("/assignments/new", data={
+        "title": "Test", "due_date": "04-42-2026", "subject": "Math", "notes": "", "links": ""
+    })
+    assert response.status_code == 200
+    assert b"real date" in response.data
+
+
 def test_past_year_shows_error(client) -> None:
     response = client.post("/assignments/new", data={
         "title": "Test", "due_date": "05-28-2020", "subject": "Math", "notes": "", "links": ""
