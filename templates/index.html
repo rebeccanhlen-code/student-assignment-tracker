@@ -4,56 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Assignment Tracker</title>
-    <style>
-        .overdue { border-left: 4px solid crimson; padding-left: 8px; background-color: #fff0f0; }
-        .urgent  { border-left: 4px solid red; padding-left: 8px; }
-        .soon    { border-left: 4px solid orange; padding-left: 8px; }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>My Assignments</h1>
-    <a href="/assignments/new">+ Add Assignment</a>
+    <header>
+        <h1>📚 My Assignments</h1>
+        <a href="/assignments/new">+ Add Assignment</a>
+    </header>
 
-    <div>
-        <a href="/?filter=all">All</a> |
-        <a href="/?filter=incomplete">Incomplete</a> |
-        <a href="/?filter=in progress">In Progress</a> |
-        <a href="/?filter=complete">Complete</a>
-    </div>
-
-    {% if assignments %}
-        {% for assignment in assignments %}
-        <div class="{{ urgency_class(assignment.due_date) }}">
-            <h2>{{ assignment.title }}</h2>
-            <p><strong>Subject:</strong> {{ assignment.subject }}</p>
-            <p><strong>Due:</strong> {{ assignment.due_date }}</p>
-            <p><strong>Status:</strong> {{ assignment.status }}
-                <form method="POST" action="/assignments/{{ assignment.id }}/toggle" style="display:inline;">
-                    <button type="submit">
-                        {% if assignment.status == "incomplete" %}Mark In Progress
-                        {% elif assignment.status == "in progress" %}Mark Complete
-                        {% else %}Mark Incomplete{% endif %}
-                    </button>
-                </form>
-            </p>
-            {% if assignment.notes %}
-            <p><strong>Notes:</strong> {{ assignment.notes }}</p>
-            {% endif %}
-            {% if assignment.links %}
-            <p><strong>Links:</strong>
-                {% for link in assignment.links %}
-                    <a href="{{ link }}">{{ link }}</a>
-                {% endfor %}
-            </p>
-            {% endif %}
-            <form method="POST" action="/assignments/{{ assignment.id }}/delete" style="display:inline;">
-                <button type="submit" onclick="return confirm('Delete this assignment?')">Delete</button>
-            </form>
+    <main>
+        <div class="filters">
+            <a href="/?filter=all">All</a>
+            <a href="/?filter=incomplete">Incomplete</a>
+            <a href="/?filter=in progress">In Progress</a>
+            <a href="/?filter=complete">Complete</a>
         </div>
-        <hr>
-        {% endfor %}
-    {% else %}
-        <p>No assignments yet!</p>
-    {% endif %}
+
+        {% if assignments %}
+            {% for assignment in assignments %}
+            <div class="card {{ urgency_class(assignment.due_date) }}">
+                <h2>{{ assignment.title }}</h2>
+                <div class="card-meta">
+                    <span><strong>Subject:</strong> {{ assignment.subject }}</span>
+                    <span><strong>Due:</strong> {{ assignment.due_date }}</span>
+                    <span>
+                        <span class="badge {{ assignment.status | replace(' ', '-') }}">
+                            {{ assignment.status }}
+                        </span>
+                    </span>
+                </div>
+                {% if assignment.notes %}
+                <p style="font-size:0.88rem; color:#555; margin-bottom:8px;">{{ assignment.notes }}</p>
+                {% endif %}
+                {% if assignment.links %}
+                <p style="font-size:0.85rem; margin-bottom:8px;">
+                    {% for link in assignment.links %}
+                        <a href="{{ link }}" style="color:#1a56db;">{{ link }}</a>
+                    {% endfor %}
+                </p>
+                {% endif %}
+                <div class="card-actions">
+                    <form method="POST" action="/assignments/{{ assignment.id }}/toggle" style="display:inline;">
+                        <button type="submit" class="btn-toggle">
+                            {% if assignment.status == "incomplete" %}Mark In Progress
+                            {% elif assignment.status == "in progress" %}Mark Complete
+                            {% else %}Mark Incomplete{% endif %}
+                        </button>
+                    </form>
+                    <form method="POST" action="/assignments/{{ assignment.id }}/delete" style="display:inline;">
+                        <button type="submit" class="btn-delete" onclick="return confirm('Delete this assignment?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">No assignments here! Add one above.</div>
+        {% endif %}
+    </main>
 </body>
 </html>
