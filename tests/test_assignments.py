@@ -54,6 +54,20 @@ def test_homepage_sorted_by_due_date(client) -> None:
     assignments.append({"id": 1, "title": "Math Homework Chapter 5", "due_date": "05-28-2026", "subject": "Math", "status": "incomplete", "notes": "Review sections 5.1 through 5.3", "links": []})
 
 
+def test_toggle_flips_status(client) -> None:
+    from app import assignments
+    assignments[0]["status"] = "incomplete"
+    client.post("/assignments/1/toggle")
+    assert assignments[0]["status"] == "complete"
+    client.post("/assignments/1/toggle")
+    assert assignments[0]["status"] == "incomplete"
+
+
+def test_toggle_unknown_id_returns_404(client) -> None:
+    response = client.post("/assignments/9999/toggle")
+    assert response.status_code == 404
+
+
 def test_homepage_returns_200(client) -> None:
     response = client.get("/")
     assert response.status_code == 200

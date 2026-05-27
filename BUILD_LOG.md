@@ -41,6 +41,13 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - Verification: Submitted the form empty, saw red error messages. Filled in just the title, saw it preserved after the error. `pytest` passes 11 tests.
 - One thing I learned: ...
 
+## Task 7 — Mark assignments as complete or incomplete
+- Brief: Each assignment needs a button that flips its status between complete and incomplete, using the assignment id in the route.
+- What Claude proposed: A POST route `/assignments/<id>/toggle` that finds the assignment by id, flips the status, and redirects. Returns 404 if id not found. Toggle button added inline on the homepage.
+- What I changed before approving: —
+- Verification: Clicked "Mark Complete" on an assignment, page reloaded showing "complete". Clicked again, flipped back. `pytest` passes 17 tests.
+- One thing I learned: ...
+
 ## Task 6 — Sort assignments by due date
 - Brief: Assignments should always display sorted by due date, earliest first, regardless of the order they were added.
 - What Claude proposed: A `sort_key` helper that converts MM-DD-YYYY to YYYY-MM-DD so Python's string sort works correctly, applied in the index route. Also added auto-dash JS so users just type 8 digits and the dashes appear automatically. Added real date validation so impossible dates like April 42 are rejected.
