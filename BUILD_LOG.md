@@ -37,15 +37,8 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 ## Task 5 — Add form validation
 - Brief: Submitting empty fields should show inline error messages without crashing the app.
 - What Claude proposed: Check title, due_date, subject in the POST handler; re-render the form with error messages and preserved values if any are blank.
-- What I changed before approving: Edit it to make sure only numbers are required in the date slot and that the year cannot be past this current year
-- Verification: Submitted the form empty, saw red error messages. Filled in just the title, saw it preserved after the error. `pytest` passes 11 tests.
-- One thing I learned: ...
-
-## Task 7 — Mark assignments as complete or incomplete
-- Brief: Each assignment needs a button that flips its status between complete and incomplete, using the assignment id in the route.
-- What Claude proposed: A POST route `/assignments/<id>/toggle` that finds the assignment by id, flips the status, and redirects. Returns 404 if id not found. Toggle button added inline on the homepage.
-- What I changed before approving: —
-- Verification: Clicked "Mark Complete" on an assignment, page reloaded showing "complete". Clicked again, flipped back. `pytest` passes 17 tests.
+- What I changed before approving: Requested that only numbers be accepted in the date field and that past years be rejected.
+- Verification: Submitted the form empty, saw red error messages. Filled in just the title, saw it preserved after the error. `pytest` passes 13 tests.
 - One thing I learned: ...
 
 ## Task 6 — Sort assignments by due date
@@ -55,3 +48,9 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - Verification: Added two assignments out of order, confirmed the earlier due date appeared first. Typed 05282026 in the date field and it became 05-28-2026 automatically. Tried 04-42-2026 and got an error. `pytest` passes 15 tests.
 - One thing I learned: ...
 
+## Task 7 — Mark assignments as complete or incomplete
+- Brief: Each assignment needs a button that cycles its status using the assignment id in the route (not list index).
+- What Claude proposed: A POST route `/assignments/<id>/toggle` that finds the assignment by id, cycles the status, and redirects. Returns 404 if id not found. Toggle button added inline on the homepage.
+- What I changed before approving: Added an "in progress" status so the cycle is incomplete → in progress → complete → incomplete.
+- Verification: Clicked through all three statuses on an assignment, page reloaded showing each change correctly. `pytest` passes 17 tests.
+- One thing I learned: ...
