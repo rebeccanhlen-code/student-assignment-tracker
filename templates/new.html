@@ -11,23 +11,26 @@
     <form method="POST" action="/assignments/new">
         <div>
             <label for="title">Title</label><br>
-            <input type="text" id="title" name="title">
+            <input type="text" id="title" name="title" value="{{ form.get('title', '') }}">
+            {% if errors.title %}<span style="color:red;">{{ errors.title }}</span>{% endif %}
         </div>
         <div>
             <label for="due_date">Due Date (MM-DD-YYYY)</label><br>
-            <input type="text" id="due_date" name="due_date" placeholder="05-28-2026">
+            <input type="text" id="due_date" name="due_date" placeholder="05-28-2026" value="{{ form.get('due_date', '') }}">
+            {% if errors.due_date %}<span style="color:red;">{{ errors.due_date }}</span>{% endif %}
         </div>
         <div>
             <label for="subject">Subject</label><br>
-            <input type="text" id="subject" name="subject">
+            <input type="text" id="subject" name="subject" value="{{ form.get('subject', '') }}">
+            {% if errors.subject %}<span style="color:red;">{{ errors.subject }}</span>{% endif %}
         </div>
         <div>
             <label for="notes">Notes (optional)</label><br>
-            <textarea id="notes" name="notes"></textarea>
+            <textarea id="notes" name="notes">{{ form.get('notes', '') }}</textarea>
         </div>
         <div>
             <label for="links">Link (optional)</label><br>
-            <input type="text" id="links" name="links" placeholder="https://...">
+            <input type="text" id="links" name="links" placeholder="https://..." value="{{ form.get('links', '') }}">
         </div>
         <br>
         <button type="submit">Add Assignment</button>

@@ -38,19 +38,35 @@ def index() -> str:
 def new_assignment() -> str:
     global next_id
     if request.method == "POST":
+        title = request.form.get("title", "").strip()
+        due_date = request.form.get("due_date", "").strip()
+        subject = request.form.get("subject", "").strip()
+        notes = request.form.get("notes", "").strip()
         link = request.form.get("links", "").strip()
+
+        errors: dict[str, str] = {}
+        if not title:
+            errors["title"] = "Title is required."
+        if not due_date:
+            errors["due_date"] = "Due date is required."
+        if not subject:
+            errors["subject"] = "Subject is required."
+
+        if errors:
+            return render_template("new.html", errors=errors, form=request.form)
+
         assignments.append({
             "id": next_id,
-            "title": request.form.get("title", "").strip(),
-            "due_date": request.form.get("due_date", "").strip(),
-            "subject": request.form.get("subject", "").strip(),
+            "title": title,
+            "due_date": due_date,
+            "subject": subject,
             "status": "incomplete",
-            "notes": request.form.get("notes", "").strip(),
+            "notes": notes,
             "links": [link] if link else [],
         })
         next_id += 1
         return redirect(url_for("index"))
-    return render_template("new.html")
+    return render_template("new.html", errors={}, form={})
 
 
 if __name__ == "__main__":

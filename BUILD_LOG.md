@@ -34,3 +34,10 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - Verification: Submitted the form with a new assignment, was redirected to homepage, new assignment appeared in the list. `pytest` passes 9 tests.
 - One thing I learned: ...
 
+## Task 5 — Add form validation
+- Brief: Submitting empty fields should show inline error messages without crashing the app.
+- What Claude proposed: Check title, due_date, subject in the POST handler; re-render the form with error messages and preserved values if any are blank.
+- What I changed before approving: —
+- Verification: Submitted the form empty, saw red error messages. Filled in just the title, saw it preserved after the error. `pytest` passes 11 tests.
+- One thing I learned: ...
+
