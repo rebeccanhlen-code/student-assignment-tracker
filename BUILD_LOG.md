@@ -82,3 +82,10 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - What I changed before approving: Chose a blue theme. Asked about user-picked colors (noted as a future feature needing a database). Requested CSS variables so the theme is easy to customize, and a dark mode toggle that remembers your preference.
 - Verification: Opened the app, confirmed cards, badges, filter buttons, and form all look clean and readable.
 - One thing I learned: ...
+
+## Task 12 — Write README.md
+- Brief: Write a README that is easy to follow and lets anyone replicate the project from scratch.
+- What Claude proposed: A README covering features, tech stack, setup steps for Mac/Linux/Windows/Codespaces, how to run tests, project structure, and a theming guide.
+- What I changed before approving: —
+- Verification: Followed the setup steps from scratch in Codespaces and confirmed the app ran.
+- One thing I learned: ...
