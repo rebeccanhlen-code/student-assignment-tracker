@@ -34,17 +34,17 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - Verification: Submitted the form with a new assignment, was redirected to homepage, new assignment appeared in the list. `pytest` passes 9 tests.
 - One thing I learned: ...
 
-## Task 6 — Sort assignments by due date
-- Brief: Assignments should always display sorted by due date, earliest first, regardless of the order they were added.
-- What Claude proposed: A `sort_key` helper that converts MM-DD-YYYY to YYYY-MM-DD so Python's string sort works correctly, applied in the index route.
-- What I changed before approving: —
-- Verification: Added two assignments out of order, confirmed the earlier due date appeared first on the homepage. `pytest` passes 14 tests.
-- One thing I learned: ...
-
 ## Task 5 — Add form validation
 - Brief: Submitting empty fields should show inline error messages without crashing the app.
 - What Claude proposed: Check title, due_date, subject in the POST handler; re-render the form with error messages and preserved values if any are blank.
 - What I changed before approving: Edit it to make sure only numbers are required in the date slot and that the year cannot be past this current year
 - Verification: Submitted the form empty, saw red error messages. Filled in just the title, saw it preserved after the error. `pytest` passes 11 tests.
+- One thing I learned: ...
+
+## Task 6 — Sort assignments by due date
+- Brief: Assignments should always display sorted by due date, earliest first, regardless of the order they were added.
+- What Claude proposed: A `sort_key` helper that converts MM-DD-YYYY to YYYY-MM-DD so Python's string sort works correctly, applied in the index route. Also added auto-dash JS so users just type 8 digits and the dashes appear automatically. Added real date validation so impossible dates like April 42 are rejected.
+- What I changed before approving: Requested auto-insert dashes so users don't have to type them. Also asked to validate that the date is a real calendar date.
+- Verification: Added two assignments out of order, confirmed the earlier due date appeared first. Typed 05282026 in the date field and it became 05-28-2026 automatically. Tried 04-42-2026 and got an error. `pytest` passes 15 tests.
 - One thing I learned: ...
 
