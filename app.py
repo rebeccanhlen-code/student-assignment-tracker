@@ -31,9 +31,15 @@ assignments: list[Assignment] = [
 next_id: int = 2
 
 
+def sort_key(a: Assignment) -> str:
+    parts = a["due_date"].split("-")
+    return f"{parts[2]}-{parts[0]}-{parts[1]}"
+
+
 @app.route("/")
 def index() -> str:
-    return render_template("index.html", assignments=assignments)
+    sorted_assignments = sorted(assignments, key=sort_key)
+    return render_template("index.html", assignments=sorted_assignments)
 
 
 @app.route("/assignments/new", methods=["GET", "POST"])

@@ -34,6 +34,13 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - Verification: Submitted the form with a new assignment, was redirected to homepage, new assignment appeared in the list. `pytest` passes 9 tests.
 - One thing I learned: ...
 
+## Task 6 — Sort assignments by due date
+- Brief: Assignments should always display sorted by due date, earliest first, regardless of the order they were added.
+- What Claude proposed: A `sort_key` helper that converts MM-DD-YYYY to YYYY-MM-DD so Python's string sort works correctly, applied in the index route.
+- What I changed before approving: —
+- Verification: Added two assignments out of order, confirmed the earlier due date appeared first on the homepage. `pytest` passes 14 tests.
+- One thing I learned: ...
+
 ## Task 5 — Add form validation
 - Brief: Submitting empty fields should show inline error messages without crashing the app.
 - What Claude proposed: Check title, due_date, subject in the POST handler; re-render the form with error messages and preserved values if any are blank.
