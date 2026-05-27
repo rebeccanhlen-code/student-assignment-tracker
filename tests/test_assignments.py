@@ -70,6 +70,26 @@ def test_toggle_unknown_id_returns_404(client) -> None:
     assert response.status_code == 404
 
 
+def test_filter_incomplete_hides_complete(client) -> None:
+    from app import assignments
+    assignments.clear()
+    assignments.extend([
+        {"id": 10, "title": "Done Task", "due_date": "12-01-2026", "subject": "Math", "status": "complete", "notes": "", "links": []},
+        {"id": 11, "title": "Todo Task", "due_date": "12-02-2026", "subject": "Math", "status": "incomplete", "notes": "", "links": []},
+    ])
+    response = client.get("/?filter=incomplete")
+    body = response.data.decode()
+    assert "Todo Task" in body
+    assert "Done Task" not in body
+    assignments.clear()
+    assignments.append({"id": 1, "title": "Math Homework Chapter 5", "due_date": "05-28-2026", "subject": "Math", "status": "incomplete", "notes": "Review sections 5.1 through 5.3", "links": []})
+
+
+def test_filter_all_shows_everything(client) -> None:
+    response = client.get("/?filter=all")
+    assert response.status_code == 200
+
+
 def test_urgency_class_overdue() -> None:
     from datetime import date, timedelta
     from app import urgency_class
