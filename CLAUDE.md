@@ -31,8 +31,10 @@ pytest tests/test_assignments.py
 - Use type hints on all function signatures.
 - Prefer small, focused functions — one responsibility per function.
 - Avoid global state; pass data explicitly or via the app factory pattern.
+- Read the relevant test file before writing any code.
 - Propose a plan and get agreement before implementing anything non-trivial.
-- Keep each PR scoped to one feature or fix.
+- Keep each PR scoped to one feature or fix; work on a branch per feature.
+- Run the relevant tests after each change; run full `pytest` before committing.
 
 ## Things Claude should not do
 
