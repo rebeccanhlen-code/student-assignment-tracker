@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Assignment</title>
+</head>
+<body>
+    <h1>Add New Assignment</h1>
+
+    <form method="POST" action="/assignments/new">
+        <div>
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title">
+        </div>
+        <div>
+            <label for="due_date">Due Date (MM-DD-YYYY)</label><br>
+            <input type="text" id="due_date" name="due_date" placeholder="05-28-2026">
+        </div>
+        <div>
+            <label for="subject">Subject</label><br>
+            <input type="text" id="subject" name="subject">
+        </div>
+        <div>
+            <label for="notes">Notes (optional)</label><br>
+            <textarea id="notes" name="notes"></textarea>
+        </div>
+        <div>
+            <label for="links">Link (optional)</label><br>
+            <input type="text" id="links" name="links" placeholder="https://...">
+        </div>
+        <br>
+        <button type="submit">Add Assignment</button>
+    </form>
+
+    <br>
+    <a href="/">Back to assignments</a>
+</body>
+</html>
