@@ -58,6 +58,6 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 ## Task 8 — Visual priority indicator
 - Brief: Assignments due soon should show a visual warning — red for due today or tomorrow, orange for within 3 days.
 - What Claude proposed: An `urgency_class` helper that computes days until due and returns "urgent" or "soon", registered as a Jinja2 global, with CSS border styles on each assignment card.
-- What I changed before approving: —
-- Verification: Added a test assignment due tomorrow, confirmed a red left border appeared. Far-future assignments had no styling. `pytest` passes 19 tests.
+- What I changed before approving: Added a separate "overdue" style (crimson with pink background) for past-due assignments, and widened the thresholds — red within 3 days, orange within 7 days instead of the original 1 and 3.
+- Verification: Added a test assignment due tomorrow, confirmed a red left border appeared. Added a past-due assignment, confirmed crimson styling. Far-future assignments had no styling. `pytest` passes 21 tests.
 - One thing I learned: ...
