@@ -56,8 +56,15 @@ def sort_key(a: Assignment) -> str:
 
 @app.route("/")
 def index() -> str:
-    sorted_assignments = sorted(assignments, key=sort_key)
-    return render_template("index.html", assignments=sorted_assignments)
+    status_filter = request.args.get("filter", "all")
+    filtered = [
+        a for a in assignments
+        if status_filter == "all"
+        or (status_filter == "incomplete" and a["status"] in ("incomplete", "in progress"))
+        or (status_filter not in ("all", "incomplete") and a["status"] == status_filter)
+    ]
+    sorted_assignments = sorted(filtered, key=sort_key)
+    return render_template("index.html", assignments=sorted_assignments, current_filter=status_filter)
 
 
 @app.route("/assignments/new", methods=["GET", "POST"])

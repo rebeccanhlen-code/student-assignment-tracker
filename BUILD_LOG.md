@@ -61,3 +61,10 @@ Each entry follows the M5/M7 routine: brief → plan → confirm → implement �
 - What I changed before approving: Added a separate "overdue" style (crimson with pink background) for past-due assignments, and widened the thresholds — red within 3 days, orange within 7 days instead of the original 1 and 3.
 - Verification: Added a test assignment due tomorrow, confirmed a red left border appeared. Added a past-due assignment, confirmed crimson styling. Far-future assignments had no styling. `pytest` passes 21 tests.
 - One thing I learned: ...
+
+## Task 9 — Filtering by status
+- Brief: Users should be able to filter assignments by status so incomplete tasks don't get buried under completed ones.
+- What Claude proposed: A `?filter=` query param on the index route with All / Incomplete / In Progress / Complete filter links on the homepage.
+- What I changed before approving: Requested that the "Incomplete" filter also show "in progress" assignments so work in progress doesn't get hidden from view.
+- Verification: Clicked "Incomplete", confirmed complete assignments were hidden but in progress ones still showed. Clicked "All", confirmed everything reappeared. `pytest` passes 23 tests.
+- One thing I learned: ...

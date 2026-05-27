@@ -14,6 +14,13 @@
     <h1>My Assignments</h1>
     <a href="/assignments/new">+ Add Assignment</a>
 
+    <div>
+        <a href="/?filter=all">All</a> |
+        <a href="/?filter=incomplete">Incomplete</a> |
+        <a href="/?filter=in progress">In Progress</a> |
+        <a href="/?filter=complete">Complete</a>
+    </div>
+
     {% if assignments %}
         {% for assignment in assignments %}
         <div class="{{ urgency_class(assignment.due_date) }}">
