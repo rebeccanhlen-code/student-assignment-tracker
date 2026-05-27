@@ -4,40 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Assignment</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Add New Assignment</h1>
+    <header>
+        <h1>📚 My Assignments</h1>
+        <a href="/">← Back</a>
+    </header>
 
-    <form method="POST" action="/assignments/new">
-        <div>
-            <label for="title">Title</label><br>
-            <input type="text" id="title" name="title" value="{{ form.get('title', '') }}">
-            {% if errors.title %}<span style="color:red;">{{ errors.title }}</span>{% endif %}
-        </div>
-        <div>
-            <label for="due_date">Due Date</label><br>
-            <input type="text" id="due_date" name="due_date" placeholder="MM-DD-YYYY" maxlength="10" value="{{ form.get('due_date', '') }}">
-            {% if errors.due_date %}<span style="color:red;">{{ errors.due_date }}</span>{% endif %}
-        </div>
-        <div>
-            <label for="subject">Subject</label><br>
-            <input type="text" id="subject" name="subject" value="{{ form.get('subject', '') }}">
-            {% if errors.subject %}<span style="color:red;">{{ errors.subject }}</span>{% endif %}
-        </div>
-        <div>
-            <label for="notes">Notes (optional)</label><br>
-            <textarea id="notes" name="notes">{{ form.get('notes', '') }}</textarea>
-        </div>
-        <div>
-            <label for="links">Link (optional)</label><br>
-            <input type="text" id="links" name="links" placeholder="https://..." value="{{ form.get('links', '') }}">
-        </div>
-        <br>
-        <button type="submit">Add Assignment</button>
-    </form>
+    <main>
+        <div class="form-container">
+            <h1>Add New Assignment</h1>
 
-    <br>
-    <a href="/">Back to assignments</a>
+            <form method="POST" action="/assignments/new">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" value="{{ form.get('title', '') }}">
+                    {% if errors.title %}<div class="error">{{ errors.title }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="due_date">Due Date</label>
+                    <input type="text" id="due_date" name="due_date" placeholder="MM-DD-YYYY" maxlength="10" value="{{ form.get('due_date', '') }}">
+                    {% if errors.due_date %}<div class="error">{{ errors.due_date }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" value="{{ form.get('subject', '') }}">
+                    {% if errors.subject %}<div class="error">{{ errors.subject }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes (optional)</label>
+                    <textarea id="notes" name="notes">{{ form.get('notes', '') }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="links">Link (optional)</label>
+                    <input type="text" id="links" name="links" placeholder="https://..." value="{{ form.get('links', '') }}">
+                </div>
+
+                <button type="submit" class="btn-submit">Add Assignment</button>
+            </form>
+
+            <a href="/" class="back-link">← Back to assignments</a>
+        </div>
+    </main>
 
     <script>
         const dateInput = document.getElementById('due_date');
